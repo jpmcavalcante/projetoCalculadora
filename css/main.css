@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css?family=Pacifico');
+
+body{
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    background: url('../img/fundo.jpg') no-repeat;
+    background-size: cover;
+}
+    
+        .calc{
+            display: grid;
+            background-image: linear-gradient(#68b0d3, #084d6e);
+            border-radius: 10px;
+            box-shadow: 1px 1px 1px 1px #7c7b7b;
+            width: 260px;
+            height: 420px;
+            grid-template-columns: repeat(4, 22%);
+            grid-template-rows: 65px repeat(5, 50px) 55px;
+            grid-gap: 1%;
+            align-content: center;
+            align-self: center;
+            justify-content: center;
+        }
+        
+        #calc__display{
+            grid-column: 1 / -1;
+            background: rgba(237, 237, 237, 0.62);
+            font-size: 3em;
+            padding: 2%;
+            height: 50px;
+            text-align: right;
+            border: solid 2px #888282;
+            display: grid;
+            grid-template-columns: repeat(2, 50%);
+            grid-template-rows: 30% 70%;
+            grid-gap: 1%
+        }
+            #calc__display--time{
+                grid-column: 1 / 2;
+                font-size: 10pt;
+                text-align: center;
+                font-family: sans-serif;
+                display: flex;
+                flex-direction: column;
+                justify-content: center
+            }
+            #calc__display--date{
+                grid-column: 2 / -1;
+                font-size: 10pt;
+                text-align: center;
+                font-family: sans-serif;
+                display: flex;
+                flex-direction: column;
+                justify-content: center
+            }
+            #calc__display--valor{
+                grid-column: 1 / -1;
+                font-size: .8em;
+                font-family: 'Pacifico', cursive;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+            
+        
+        .mais{
+            grid-column: 4 / 5;
+            grid-row: 5 / 7;
+            background: rgb(255, 90, 90);
+        }
+        
+        .zero{
+            grid-column: 1 /3;
+            
+        }
+        
+        button{
+            font-size: 1.4em;
+            color: #084d6e;
+            border-radius: 10%;
+            background-image: radial-gradient(transparent 30%, rgba(0, 0, 0, 0.19));
+        }
+
+.calc__logotipo{
+    grid-column: 1 / -1;
+    grid-row: 7 / 8;
+   
+    
+}
+.calc__logotipo img{
+    max-width: 1000%;
+    height: 100%;
+    display: block;
+    margin: auto;
+}
+    
