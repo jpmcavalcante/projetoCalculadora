@@ -175,8 +175,6 @@ calc(){
         this._lastNumber = this.getResult(false);
     }
     
-    console.log('operato', this._lastOperator);
-    console.log('Number', this._lastNumber);
     //O JOIN junta todos os valores do ARRAY em uma STRING e o Eval avalia a expressão
     let result = this.getResult();
     
@@ -253,7 +251,7 @@ addOperator(value){
         
             let newValue = this.getLastOperator().toString() + value.toString();
         
-            this.setLastOperator(parseFloat(newValue));        
+            this.setLastOperator(newValue);        
         
             this.setLastNumberToDisplay();
         }
@@ -263,9 +261,12 @@ addOperator(value){
     
     
 //--------------------------------------------------
-    
+ 
+//Método de Recebimento do Botão PONTO
 addDot(){
    let lastOperator = this.getLastOperator();
+    //Verificando o Tipo da variável, e comparando se é string, e contando a quantidade de pontos.
+    if(typeof lastOperator === 'string' && lastOperator.split('').indexOf('.') > -1) return;
    
     if(this.isOperator(lastOperator) || !lastOperator){
         this.pushOperator('0.');
@@ -275,8 +276,7 @@ addDot(){
     this.setLastNumberToDisplay();
 }
 
-    
-    
+//---------------------------------------------------    
 //Método Capturando Execução dos Botões 
 execBtn(value){
     
