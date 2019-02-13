@@ -3,33 +3,51 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
     <head>
-        <title>Calculadora</title>
+        <title>JPMCavalcante | Calculator</title>
         <link href="css/main.css" rel="stylesheet">
     </head>
     <body>
+    <!--Calculator Structure--->
         <div class="calc">
+            <!--Display Calculator--->
             <div id="calc__display">
                 <div id="calc__display--time"></div>
                 <div id="calc__display--date"></div>
-                <div id="calc__display--valor"></div>
+                <div id="calc__display--value"></div>
             </div>
             
-            <button class="btn-ac">AC</button> <button class="btn-porcentagem">%</button> <button class="btn-multiplicacao">X</button> <button class="btn-divisao">/</button>
+            <!--buttons Organization--->
+            <button class="btn-ac">AC</button>
+            <button class="btn-ce">CE</button>
+            <button class="btn-porcentage">%</button>
+            <button class="btn-multiplication">x</button>
+            <button class="btn-division">÷</button>
             
-            <button class="btn-7">7</button> <button class="btn-8">8</button> <button class="btn-9">9</button> <button class="btn-igual">=</button> 
+            <button class="btn-7">7</button>
+            <button class="btn-8">8</button>
+            <button class="btn-9">9</button>
+            <button class="btn-equal">=</button> 
             
-            <button class="btn-4">4</button> <button class="btn-5">5</button> <button class="btn-6">6</button> <button class="btn-subtracao">-</button>
+            <button class="btn-4">4</button>
+            <button class="btn-5">5</button>
+            <button class="btn-6">6</button>
+            <button class="btn-subtract">-</button>
             
-            <button class="btn-1">1</button> <button class="btn-2">2</button> <button class="btn-3">3</button> <button class="btn-soma">+</button>
+            <button class="btn-1">1</button>
+            <button class="btn-2">2</button> 
+            <button class="btn-3">3</button> 
+            <button class="btn-sum">+</button>
             
-            <button class="btn-0">0</button> <button class="btn-ponto">,</button>
+            <button class="btn-0">0</button> 
+            <button class="btn-ponto">.</button>
             
-            <div class="calc__logotipo">
-                <img src="img/logo_jpm.png" alt="Logo Tipo João Pedro Design">
-            </div>
+            <!--Calculator Footer---> 
+            <footer class="calc__logo">
+                <img class="calc__logo--img" src="img/logo_jpm.png" alt="Logo Tipo João Pedro Design">
+            </footer>
         </div>
     
-    
+    <!--Scripts de Controle--->
         <script src="scripts/controller/CalcRegra.js"></script>
         <script src="scripts/calculator.js"></script>
     </body>

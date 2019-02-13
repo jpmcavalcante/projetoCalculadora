@@ -1,19 +1,17 @@
 //Classe CalcRegra
 class CalcRegra {
-    
+ 
+//Método Cosntrutor
     constructor(){
+        this._lastOperator = '';
+        this._lastNumber = '';
         
         this._operator = [];
-      /*  this.clearAll();
-        this.addOperator();
-        this.setError();
-        this.clearEntry();
-        this.execBtn(); */
         
         //Armazena dentro da Variável _locate.
         this._locate = 'en-EN';
         //Referencia e armazena o elemento HTML/CSS
-        this._displayCalcEl =  document.querySelector('#calc__display--valor');
+        this._displayCalcEl =  document.querySelector('#calc__display--value');
         this._dateEl =  document.querySelector('#calc__display--date');
         this._timeEl = document.querySelector('#calc__display--time');
         
@@ -51,28 +49,28 @@ class CalcRegra {
     }
     
 //----------------------------------------------------------    
-    //Método de Eventos dos botões da calculadora.
-    initButtonsEvents(){
-        //Declarado a Variável e armazenando os elementos buttons.
-        let buttons = document.querySelectorAll('.calc > button');
-        
-        //Faz uma busca no array buttons, com o forEach procurando nos btn, o evento click ou drag
-        buttons.forEach((btn, index) => {
-            //Adicionando evento de Click e Drag.
-            this.addEventListenerAll(btn, "click drag", e=>{
-                //testando e tratando a saída no console
-                let textBtn = btn.className.replace("btn-", "");
-                
-                this.execBtn(textBtn);
-            });
-            
-            //Adicionando Evento de mouseover, mouseup e mousedown
-            this.addEventListenerAll(btn, "mouseover mouseup mousedown", e=> {
-               //E transformando o ponteiro em uma mão no elemento que foi adicionado o evento.
-                btn.style.cursor = "pointer";   
-            });
-        });      
-    }
+//Método de Eventos dos botões da calculadora.
+initButtonsEvents(){
+    //Declarado a Variável e armazenando os elementos buttons.
+    let buttons = document.querySelectorAll('.calc > button');
+
+    //Faz uma busca no array buttons, com o forEach procurando nos btn, o evento click ou drag
+    buttons.forEach((btn, index) => {
+        //Adicionando evento de Click e Drag.
+        this.addEventListenerAll(btn, "click drag", e=>{
+            //testando e tratando a saída no console
+            let textBtn = btn.className.replace("btn-", "");
+
+            this.execBtn(textBtn);
+        });
+
+        //Adicionando Evento de mouseover, mouseup e mousedown
+        this.addEventListenerAll(btn, "mouseover mouseup mousedown", e=> {
+           //E transformando o ponteiro em uma mão no elemento que foi adicionado o evento.
+            btn.style.cursor = "pointer";   
+        });
+    });      
+}
     
 //----------------------------------------------------------   
     
@@ -90,6 +88,10 @@ class CalcRegra {
     
 clearAll(){
     this._operator = [];
+    
+    this._lastNumber = '';
+    this._lastOperator = '';
+    
     this.setLastNumberToDisplay();
 }
     
@@ -101,6 +103,8 @@ clearEntry(){
 setError(){
     this.displayCalc = "Error";
 }
+    
+//-------------------------------------------------------
 
 //Método para pegar a Ultima posição do ARRAY.
 getLastOperator(){
@@ -122,7 +126,7 @@ isOperator(value){
     /*Caso tenha tenha o valor dentro do array, o indexOf retorna qualquer valor acima de -1. Ocasionando o resultado TRUE.*/
 }
     
-//--------------------------------------------------
+//----------------------------------------------------
     
 pushOperator(value){
     this._operator.push(value);
@@ -132,6 +136,16 @@ pushOperator(value){
         this.calc();
     }
 }
+
+//----------------------------------------------------
+    
+getResult(){
+    console.log('getResult', this._operator);
+    
+    return eval(this._operator.join(""));
+}    
+
+//----------------------------------------------------
     
 //Método que realiza o cálculo
 calc(){
@@ -139,13 +153,33 @@ calc(){
     //Variável LAST declarada e recebendo valor vazio.
     let last = '';
     
+    this._lastOperator = this.getLastItem();
+    
+    //Verrifica se o ARRAY tem mais de 3 valores
+    if (this._operator.length < 3){
+        //Após a Verificação LAST recebe o ultimo do ARRAY
+        let firstItem = this._operator[0];
+        this._operator = [firstItem, this._lastOperator, this._lastNumber];
+    }
+    
     //Verrifica se o ARRAY tem mais de 3 valores
     if (this._operator.length > 3){
         //Após a Verificação LAST recebe o ultimo do ARRAY
         last = this._operator.pop();//O POP retira o ultimo valor do ARRAY
+    
+        this._lastNumber = this.getResult();
     }
+    
+    if(this._operator.length == 3){
+     
+        this._lastNumber = this.getResult(false);
+    }
+    
+    console.log('operato', this._lastOperator);
+    console.log('Number', this._lastNumber);
     //O JOIN junta todos os valores do ARRAY em uma STRING e o Eval avalia a expressão
-    let result = eval(this._operator.join(""));
+    let result = this.getResult();
+    
     
     //Verifica se o operador recebido é o Porcento 
     if(last == '%'){
@@ -162,20 +196,34 @@ calc(){
     }
         this.setLastNumberToDisplay();
 }//FIM do Método CALC
+
+//---------------------------------------------------
     
+getLastItem(isOperator = true){
+    let lastItem;
     
+    for (let i = this._operator.length-1; i >= 0; i--){
+        
+            if(this.isOperator(this._operator[i]) == isOperator){
+                    lastItem = this._operator[i];
+                    break;
+            }
+        }
+    
+        if(!lastItem){
+            lastItem = (isOperator) ? this._lastOperator : this._lastNumber;
+        }
+    return lastItem;
+}   
+    
+//--------------------------------------------------   
     
 setLastNumberToDisplay(){
     
-    let lastNumber;
+    let lastNumber = this.getLastItem(false);
     
-    for (let i = this._operator.length-1; i >= 0; i--){
-        if(!this.isOperator(this._operator[i])){
-            lastNumber = this._operator[i];
-            break;
-        }
-    }
-    if(!lastNumber) lastNumber = 0; 
+    if(!lastNumber) lastNumber = 0;
+    
     this.displayCalc = lastNumber;
 }
     
@@ -185,27 +233,51 @@ setLastNumberToDisplay(){
 addOperator(value){
     
     if(isNaN(this.getLastOperator())){
+       
         if(this.isOperator(value)){
+            
             this.setLastOperator(value);
-        }else if(isNaN(value)){
-            console.log('OutraCoisa');
+    
         }else{
-        this.pushOperator(value);
-        this.setLastNumberToDisplay();
-    }
+            
+            this.pushOperator(value);
+            this.setLastNumberToDisplay();
+        }
     }else{
         
         if(this.isOperator(value)){
+            
             this.pushOperator(value);
+        
         }else{
+        
             let newValue = this.getLastOperator().toString() + value.toString();
-        this.setLastOperator(parseInt(newValue));        
-        this.setLastNumberToDisplay();
+        
+            this.setLastOperator(parseFloat(newValue));        
+        
+            this.setLastNumberToDisplay();
         }
     }
 }
     
     
+    
+//--------------------------------------------------
+    
+addDot(){
+   let lastOperator = this.getLastOperator();
+   
+    if(this.isOperator(lastOperator) || !lastOperator){
+        this.pushOperator('0.');
+    }else{
+        this.setLastOperator(lastOperator.toString() + '.');
+    }
+    this.setLastNumberToDisplay();
+}
+
+    
+    
+//Método Capturando Execução dos Botões 
 execBtn(value){
     
 //SWITCH para Leitura dos botões do Teclado
@@ -216,26 +288,26 @@ execBtn(value){
         case 'ce':
             this.clearEntry();
             break;
-        case 'soma':
+        case 'sum':
             this.addOperator('+');
             break;
-        case 'subtracao':
+        case 'subtract':
             this.addOperator('-');
             break;
-        case 'divisao':
+        case 'division':
             this.addOperator('/');
             break;
-        case 'multiplicacao':
+        case 'multiplication':
             this.addOperator('*');
             break;
-        case 'porcentagem':
+        case 'porcentage':
             this.addOperator('%');
             break;
-        case 'igual':
+        case 'equal':
             this.calc();
             break;
         case 'ponto':
-            this.addOperator('.');
+            this.addDot('.');
             break;
         case '0':
         case '1':
