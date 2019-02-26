@@ -3,7 +3,7 @@ class CalcRegra {
 
     //Método Cosntrutor
     constructor() {
-        this._audio = new Audio('../audio/click.mp3');
+        this._audio = new Audio('../projetoCalculadora/audio/click.mp3');
         this._audioOnOff = false;
         this._lastOperator = '';
         this._lastNumber = '';
