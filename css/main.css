@@ -6,8 +6,11 @@ body{
     justify-content: center;
     background: url('../img/fundo.jpg') no-repeat;
     background-size: cover;
-
 }
+#inputClipBoard{
+    display: none;
+}
+    
         .calc{
             display: grid;
             background-image: linear-gradient(#68b0d3, #084d6e);
