@@ -171,9 +171,13 @@ class CalcRegra {
     //----------------------------------------------------
 
     getResult() {
-        console.log('getResult', this._operator);
-
-        return eval(this._operator.join(""));
+        try{
+            return eval(this._operator.join(""));
+        }catch(e){
+            setTimeout(()=>{
+                this.setError();
+            },1);
+        }
     }
 
     //----------------------------------------------------
@@ -466,7 +470,12 @@ class CalcRegra {
         return this._displayCalcEl.innerHTML;
     }
 
+    //Metodo para exibe o valor na tela, e analisando o limite de caracteres na tela da calculadora.
     set displayCalc(value) {
+        if(value.toString().length > 10){
+            this.setError();
+            return false;
+        }
         this._displayCalcEl.innerHTML = value;
     }
 
