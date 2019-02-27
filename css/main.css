@@ -5,12 +5,33 @@ body{
     display: flex;
     justify-content: center;
     background: url('../img/fundo.jpg') no-repeat;
-    background-size: cover;
+   
 }
 #inputClipBoard{
     display: none;
 }
-    
+
+    .div__audio{
+        background: rgba(109, 106, 106, 0.4);
+        width: 3em;
+        height: 3em;
+        border-radius: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 1px 1px 1px 2px rgba(0, 0, 0, 0.42);
+        padding: 1%;
+        box-sizing: border-box;
+        margin-left:2%;
+    }
+
+    .div__audio img{
+        max-width: 60%;
+        max-height: 100%;
+        height: auto;
+        opacity: .5;
+    }
+
         .calc{
             display: grid;
             background-image: linear-gradient(#68b0d3, #084d6e);

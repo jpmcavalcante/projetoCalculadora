@@ -3,7 +3,7 @@ class CalcRegra {
 
     //Método Cosntrutor
     constructor() {
-        this._audio = new Audio('/projetoCalculadora/audio/click.mp3');
+        this._audio = new Audio('../audio/click.mp3');
         this._audioOnOff = false;
         this._lastOperator = '';
         this._lastNumber = '';
@@ -40,9 +40,9 @@ class CalcRegra {
         this.pasteToClipboard();
         
         
-        document.querySelectorAll('.btn-ac').forEach(btn=>{
+        document.querySelectorAll('#div__btn-audio').forEach(btn=>{
             
-            btn.addEventListener('dblclick', e=>{
+            btn.addEventListener('click', e=>{
                 
                 this.statusAudio();
                 
