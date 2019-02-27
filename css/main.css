@@ -136,4 +136,13 @@ body{
     display: block;
     margin: auto;
 }
+
+@media screen and (min-width: 1200px){
+    .div__audio img{
+        max-width: 80%;
+        max-height: 100%;
+        height: auto;
+        opacity: .5;
+    }
+}
     
