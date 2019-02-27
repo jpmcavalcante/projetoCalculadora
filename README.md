@@ -10,4 +10,4 @@
 
 [Calculadora JPM](https://jpmcavalcante.github.io/projetoCalculadora/)
 
-### Ultima Atualização 26/02/2019
+_Ultima Atualização 26-02-2019_
